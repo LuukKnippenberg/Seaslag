@@ -1,0 +1,89 @@
+body{
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;		
+}
+
+html{
+	height: 100%;
+}
+
+//Custom Font Import
+//@import url('https://fonts.googleapis.com/css?family=Anton|Montserrat');
+
+p{
+	font-family: $defaultFont;
+	font-size: 16px;
+	line-height: 30px;
+}
+
+a {
+	font-family: $defaultFont;
+	transition: 0.3s;
+	text-decoration: none;
+
+	&:hover {
+		color: $firstColor;
+	}
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: $titleFont;
+}
+
+ul{
+
+	li{
+		font-family: $defaultFont;
+	}
+}
+
+ol{
+
+	li{
+		font-family: $defaultFont;
+
+		&::first-letter{
+			text-transform: capitalize;
+		}
+	}
+}
+
+button {
+	font-family: $fontColor;
+	font-weight: bold;
+	color: $firstColor;
+	background: $firstColor;
+	padding: 10px 20px;
+	border: none;
+	font-size: 22px;
+	width: auto;
+
+	&:hover {
+		background-color: $secondColor;
+		transition: 0.3s;
+	}
+}
+
+header {
+
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+	padding: 1px;
+	margin-bottom: 10px;
+	margin-right: 10px;
+	background-image: linear-gradient(to right, $greenDark, black, $greenDark);
+	width: 500px;
+}
+
+.grid-item {
+	border: 2px solid $greenLight;
+	box-shadow: 0 0 7px $greenLight;
+	padding: 10px;
+	font-size: 30px;
+	text-align: center;
+	height: 50px;
+}
