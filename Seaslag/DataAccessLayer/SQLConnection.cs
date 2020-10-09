@@ -13,11 +13,6 @@ namespace DataAccessLayer
         private static MySqlConnection CreateConnection()
         {
             MySqlConnection cnn;
-            //for debugging
-            //string connetionString = $"server=bier-1.democgi.com;database=PlannerApplicatie;uid=nova;pwd=AkXxYFSD03oFLHmV;";
-            //for release
-            //string connetionString = $"server=localhost;database=PlannerApplicatie;uid=nova;pwd=AkXxYFSD03oFLHmV;";
-            //for anti-
             string connectionString = $"server=185.182.57.161;database=tijnvcd415_Battleships;uid=tijnvcd415_Battleships;pwd=123456;";
             cnn = new MySqlConnection(connectionString);
             return cnn;
