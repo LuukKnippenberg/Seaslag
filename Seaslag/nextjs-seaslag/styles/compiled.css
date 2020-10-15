@@ -23,6 +23,12 @@ a:hover {
   color: #B6AD9E;
 }
 
+a {
+  font-family: segoe UI, sans-serif;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: segoe UI, sans-serif;
 }

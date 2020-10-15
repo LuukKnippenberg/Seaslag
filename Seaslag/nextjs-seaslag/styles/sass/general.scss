@@ -27,6 +27,12 @@ a {
 	}
 }
 
+a {
+	font-family: $defaultFont;
+	transition: 0.3s;
+	text-decoration: none;
+}
+
 h1, h2, h3, h4, h5, h6{
     font-family: $titleFont;
 }
