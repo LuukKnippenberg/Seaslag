@@ -9,16 +9,15 @@ export default function Home() {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-
-      <Link href="/account">
-          <a >Accountlink</a>
-        </Link>
-      <section className={utilStyles.headingMd}>
-        <p>[Your Self Introduction]</p>
-        <p>
-          (This is a sample website - you’ll be building a site like this on{' '}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
-        </p>
+-      <section className={utilStyles.headingMd}>
+        <div class="block">
+          <div class="content">
+            <p>Username: Lorem Ipsum</p>
+            <p>Password: ********</p>
+            <p>Press enter to submit</p>
+          </div>
+          
+        </div>
       </section>
     </Layout>
   )
