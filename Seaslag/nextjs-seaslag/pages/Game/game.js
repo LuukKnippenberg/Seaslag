@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Layout from '../../components/layout'
+import GridComponent from '../../components/grid'
 
 export default function Game() {
   return (
@@ -14,6 +15,10 @@ export default function Game() {
           <h1 className="title">
             Game
           </h1>
+          <div>
+            gridjee
+            <GridComponent />
+          </div>
         </main>
       </div>
     </Layout>
