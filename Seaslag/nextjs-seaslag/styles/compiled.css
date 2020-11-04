@@ -146,6 +146,10 @@ main {
   font-size: 30px;
   text-align: center;
   height: 50px;
+  transition: 0.3s;
+}
+.grid-item:hover {
+  background-color: #00FF41;
 }
 
 /*# sourceMappingURL=compiled.css.map */
