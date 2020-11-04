@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 
+
 export default function Home() {
   return (
     <Layout home>
@@ -16,7 +17,7 @@ export default function Home() {
             <p>Password: ********</p>
             <p>Press enter to submit</p>
           </div>
-          
+          <Link href="/Game/game"><a>klik hier plz</a></Link>
         </div>
       </section>
     </Layout>
