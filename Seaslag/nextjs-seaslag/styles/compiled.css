@@ -42,6 +42,7 @@ ul {
   margin: 0;
   padding: 0;
   display: flex;
+  flex-direction: column;
 }
 ul li {
   text-decoration: none;
@@ -108,9 +109,11 @@ button:hover {
 }
 
 main {
-  max-width: 1280px;
   margin: 0 auto;
   min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .block {
@@ -150,6 +153,33 @@ main {
 }
 .grid-item:hover {
   background-color: #00FF41;
+}
+
+.gameview {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.player-screen {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  padding: 25px;
+}
+.player-screen .intro {
+  width: 500px;
+  background-color: #003B00;
+  color: #00FF41;
+  border-radius: 15px;
+  margin: 15px 0;
+  padding: 15px 15px;
+}
+.player-screen .intro h1, .player-screen .intro h2 {
+  color: #00FF41;
+  font-size: 2rem;
+  margin: 0;
+  padding: 0;
 }
 
 /*# sourceMappingURL=compiled.css.map */

@@ -7,7 +7,7 @@ const amountOfPlayers = 4;
 
 export default function Game() {
 
-  const players = ["Jaron"]
+  const players = ["Jaron", "Justin", "Tijn", "Luc"]
   var playerCounter = 0;
   
   return (
@@ -18,23 +18,20 @@ export default function Game() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <main className={"main main-game"}>
-          <h1 className="title">
-            Game
-          </h1>
-          <div className={"gameview"}>
-            {players.map(i => {
-              playerCounter++;
-              return (
-                <section className={"player-screen " + "player-" + playerCounter}>
-                  <h2>{i}</h2>
-                  <GridComponent />
-                </section>
-              );
-              
-            })}
-          </div>
-        </main>
+        <div className={"gameview"}>
+          {players.map(i => {
+            playerCounter++;
+            return (
+              <section className={"player-screen " + "player-" + playerCounter}>
+                <div className={"intro"}>
+                  <h2>Username: {i}</h2>
+                </div>
+                
+                <GridComponent />
+              </section>
+            );
+          })}
+        </div>
       </div>
     </Layout>
   )
