@@ -4,42 +4,40 @@ import utilStyles from '../styles/utils.module.css'
 
 const gridSizeHorizontal = 10;
 const gridSizeVertical = 10;
-const grid = GenerateGrid();
+const grid = GenerateGrid(gridSizeHorizontal, gridSizeVertical );
 
 export default function GridComponent({  }) {
   return (
    <div>
-     <div className="grid">
-      <div className="content" dangerouslySetInnerHTML={{__html: grid}}></div>
-     </div>
-   </div>
+      <div className="grid">
+        {/* <div className="content" dangerouslySetInnerHTML={{__html: gridString}}></div> */}
+
+        <div class="grid-container">
+          {grid.map(item => {
+            return (
+                <a  id={"x-" + item.x + " y-" + item.y + " id-" + item.id} class="grid-item" onClick={() => console.log(item.id)}></a>
+            );
+          })}
+        </div>
+
+      </div>
+    </div>
   )
 }
 
-function GenerateGrid()
-{
-  var grid = "<div class='grid-container'>"
-  var tempGrid;
+function GenerateGrid(horizontal, vertical){
 
-  for(var x=0; x < gridSizeHorizontal; x++)
+  var tempGrid = [];
+  
+
+  for(var y = 0; y < vertical; y++)
   {
-    //X axis loop
-
-    for(var y=0; y < gridSizeVertical; y++)
+    for(var x = 0; x < horizontal; x++)
     {
-      //Y axis loop
-      tempGrid = grid.concat('<a href="#" id="x' + x + ' y' + y + '" class="grid-item" onclick={console.log(' + x + y +')}></a>');
-      grid = tempGrid;
+      var gridItem = {id: "" + y + x, item: "test", x: x, y: y}
+      tempGrid.push(gridItem)
     }
   }
 
-  tempGrid = grid.concat('</div>')
-  grid = tempGrid;
-
-  return grid;
-}
-
-function ConsoleLog()
-{
-    console.log("message")
+  return tempGrid;
 }
