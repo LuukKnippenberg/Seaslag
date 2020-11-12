@@ -12,6 +12,9 @@ body {
 html {
   height: 100%;
 }
+div{
+  font-family: perfect DOS, sans-serif;
+}
 
 p {
   font-family: perfect DOS, sans-serif;
@@ -128,7 +131,10 @@ main {
   color: #00FF41;
   font-size: 3rem;
 }
-
+.text-green {
+  color: #00FF41;
+  font-size: 3rem;
+}
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
@@ -146,6 +152,9 @@ main {
   font-size: 30px;
   text-align: center;
   height: 50px;
+}
+.black-outline{
+  text-shadow: 2px 2px 0px #000;
 }
 
 /*# sourceMappingURL=compiled.css.map */
