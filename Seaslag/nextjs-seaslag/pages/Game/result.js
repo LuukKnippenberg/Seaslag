@@ -6,15 +6,22 @@ export default function Result() {
     <Layout>
       <div className="container">
         <Head>
-          <title>Result</title>
+          <title>Victory</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
         <main>
-          <h1 className="title">
-            Results
-          </h1>
-          <p>Gewonnen lekker bezig hoor.</p>
+         <div class="block">
+           <form method = "POST" id = "Victory form">
+           <div class="content">
+           <p className={`text-green ${styles.mt2} ${styles.textCenter}`}>
+                  Congratulations!!
+              </p>
+
+
+             </div>
+           </form>
+         </div>
         </main>
       </div>
     </Layout>
