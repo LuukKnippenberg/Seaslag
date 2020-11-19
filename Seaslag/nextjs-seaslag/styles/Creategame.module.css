@@ -1,0 +1,83 @@
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.textSmall{
+    font-size: 200%;
+}
+
+.col {
+    display: flex;
+    width: 25%;
+    height: auto;
+    margin: auto;
+}
+
+.mtAuto {
+    margin-top: auto;
+}
+
+.mt0 {
+    margin-top: 0;
+}
+
+.mt1 {
+    margin-top: (16px * .25);
+}
+
+.mt2 {
+    margin-top: (16px * .5);
+}
+
+.mt3 {
+    margin-top: 16px;
+}
+
+.mxAuto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.textCenter {
+    text-align: center;
+}
+
+/* HIDE RADIO */
+
+.mapSelector {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* IMAGE STYLES */
+
+.mapSelector+div {
+    cursor: pointer;
+}
+
+/* CHECKED STYLES */
+
+.mapSelector:checked+div {
+    outline: 4px solid #00FF41;
+}
+
+.imageContainer{
+    width:160px; 
+    height:280px;
+}
+.Hawaii{
+    background-image: url("/images/MapImages/Hawaii Sea.jpg");
+}
+.Siberia{
+    background-image: url("/images/MapImages/Siberia Sea.jpg");
+}
+.Omaha{
+    background-image: url("/images/MapImages/Omaha Beach.jpg");
+}
+
+.HoverBlack:hover{
+color:#000;
+}
