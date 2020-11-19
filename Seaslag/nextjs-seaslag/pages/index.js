@@ -18,6 +18,7 @@ export default function Home() {
             <p>Press enter to submit</p>
           </div>
           <Link href="/Game/game"><a>klik hier plz</a></Link>
+          <Link href="/Game/result"><a>Temp for testing</a></Link>
         </div>
       </section>
     </Layout>
