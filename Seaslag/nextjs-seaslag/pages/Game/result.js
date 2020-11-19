@@ -18,9 +18,12 @@ export default function Result() {
                 <p className={`text-green ${styles.mt2} ${styles.textCenter}`}>
                   Victory
               </p> 
-              <p className={`text-green ${styles.mt2} ${styles.textCenter}`}>
+              <div class = "content" >
+              <p className={`text-green ${styles.mt2} ${styles.textCenter}`}  >
+                  
                   Return to home screen
               </p>
+              </div>
               </div>
             </form>
           </div>
