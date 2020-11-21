@@ -1,7 +1,15 @@
 import Head from 'next/head'
 import Layout from '../../components/layout'
+import styles from '../../styles/Lobby.module.css'
 
 export default function Lobby() {
+
+  var UsedImage = 'url("/images/MapImages/Omaha Beach.jpg")'
+  var Player1 = "Danillo"
+  var Player2 = "Luuk"
+  var Player3 = "Jaron"
+  var LobbyCode = "A1B2"
+
   return (
     <Layout>
       <div className="container">
@@ -11,10 +19,34 @@ export default function Lobby() {
         </Head>
 
         <main>
-          <h1 className="title">
-            Lobby
-          </h1>
-          
+          <div class="block" >
+            <div className={`content ${styles.height100}`} style={{position: "relative"}}>
+              <div className={`${styles.textCenter}`}>
+                <p>
+                  Code: {LobbyCode}
+                </p>
+              </div>
+              <div className={`${styles.row} text-green ${styles.textSmall}`}>
+                <div style={{marginTop: 0}} className={`${styles.collg} ${styles.textLeft}`}>
+                  Player 1: {Player1}
+                  <br/>
+                  Player 2: {Player2}
+                  <br/>
+                  Player 3: {Player3}
+                  <br/>
+                  Player 4: You
+                </div>
+                <div className={`${styles.colsm} ${styles.textCenter}`}>
+                  <div style={{marginLeft: "auto", marginRight: 0, backgroundImage: UsedImage}} className={`black-outline ${styles.mapImg}`}> Map: Omaha</div>
+                </div>
+              </div>
+              <div  className={`${styles.center} `}>
+                <button style={{bottom: 25}} className={`${styles.button} ${styles.center} ${styles.posAbso}`}>
+                  Ready
+                </button>
+              </div>
+            </div>
+          </div>
         </main>
       </div>
     </Layout>

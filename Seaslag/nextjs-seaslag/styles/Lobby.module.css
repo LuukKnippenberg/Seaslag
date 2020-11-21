@@ -1,0 +1,73 @@
+.textCenter{
+    text-align: center !important;
+}
+.height100{
+    height: 100%;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+}
+.col {
+    display: flex;
+    width: 300px;
+    height: auto;
+    margin: auto;
+}
+.collg{
+    display: flex;
+    width:440px;
+    height: auto;
+    margin: auto;
+}
+.colsm{
+    display: flex;
+    width:160px;
+    height: auto;
+    margin: auto;
+}
+
+.textSmall{
+    font-size:150% !important;
+}
+.textLeft{
+    text-align:left;
+}
+.textRight{
+    vertical-align: right;
+    justify-content: right;
+    float: right;
+    align-content: right;
+    align-items: right;
+    align-self: right;
+    text-align: right;
+}
+.button {
+    padding: 15px 32px;
+    font-family: perfect DOS, sans-serif;
+    text-align: center;
+    font-size: 25px;
+    background-color: #00000000;
+    color: #00FF41;
+    border: 2px solid #00FF41;
+    transition-duration: 0.4s;
+}
+.button:hover {
+    background-color: #00FF41;
+    color: black;
+}
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pt3{
+    padding-top:  16px;
+}
+.posAbso{
+    position: absolute;
+}
+.mapImg{
+    width: 160px;
+    height: 280px;
+}

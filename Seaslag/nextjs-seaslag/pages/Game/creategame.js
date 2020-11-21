@@ -19,7 +19,7 @@ export default function CreateGame() {
               <div class="content">
                 <div>
                   <label className={`text-green`} name="AmountOfPlayers"> Amount of players: </label>
-                  <input className={`text-green ${styles.inputNumber} ${styles.textCenter}`} type="number" name="PlayerCount" min='2' max='4' defaultValue="2"></input>
+                  <input className={`text-green ${styles.inputNumber} ${styles.textCenter}`} type="number" name="AmountOfPlayers" min='2' max='4' defaultValue="2"></input>
                 </div>
                 <div class="container">
                   <div className={styles.row}>
