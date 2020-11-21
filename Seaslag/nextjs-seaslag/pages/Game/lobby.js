@@ -5,10 +5,31 @@ import styles from '../../styles/Lobby.module.css'
 export default function Lobby() {
 
   var UsedImage = 'url("/images/MapImages/Omaha Beach.jpg")'
-  var Player1 = "Danillo"
-  var Player2 = "Luuk"
-  var Player3 = "Jaron"
+  var Players = [
+    "Danillo",
+    "Luuk",
+    "Jaron"
+  ]
+  var PlayerStatus = [
+    true,
+    false,
+    true
+  ]
   var LobbyCode = "A1B2"
+  var IsHost = false;
+  
+  if(IsHost){
+    var buttonText = "Start"
+  } else {
+    var buttonText = "Ready"
+  }
+  for(var i = 0; i < Players.length; i++){
+    if(PlayerStatus[i]){
+      Players[i] += "✔"
+    } else {
+      Players[i] += "❌"
+    }
+  }
 
   return (
     <Layout>
@@ -28,11 +49,11 @@ export default function Lobby() {
               </div>
               <div className={`${styles.row} text-green ${styles.textSmall}`}>
                 <div style={{marginTop: 0}} className={`${styles.collg} ${styles.textLeft}`}>
-                  Player 1: {Player1}
+                  Player 1: {Players[0]}
                   <br/>
-                  Player 2: {Player2}
+                  Player 2: {Players[1]}
                   <br/>
-                  Player 3: {Player3}
+                  Player 3: {Players[2]}
                   <br/>
                   Player 4: You
                 </div>
@@ -42,7 +63,7 @@ export default function Lobby() {
               </div>
               <div  className={`${styles.center} `}>
                 <button style={{bottom: 25}} className={`${styles.button} ${styles.center} ${styles.posAbso}`}>
-                  Ready
+                  {buttonText}
                 </button>
               </div>
             </div>
