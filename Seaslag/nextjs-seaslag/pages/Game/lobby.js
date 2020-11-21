@@ -25,9 +25,9 @@ export default function Lobby() {
   }
   for(var i = 0; i < Players.length; i++){
     if(PlayerStatus[i]){
-      Players[i] += "✔"
+      Players[i] += " ✔"
     } else {
-      Players[i] += "❌"
+      Players[i] += " ❌"
     }
   }
 
