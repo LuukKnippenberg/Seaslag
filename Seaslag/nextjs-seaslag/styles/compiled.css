@@ -12,9 +12,6 @@ body {
 html {
   height: 100%;
 }
-div{
-  font-family: perfect DOS, sans-serif;
-}
 
 p {
   font-family: perfect DOS, sans-serif;
@@ -73,6 +70,45 @@ button {
 button:hover {
   background-color: #C4C4C4;
   transition: 0.3s;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.row.space-between {
+  align-content: space-between;
+}
+.row .col {
+  display: flex;
+}
+
+.content {
+  width: 100%;
+}
+
+.block.home .col {
+  width: 50%;
+  justify-content: center;
+  align-content: center;
+}
+.block.home .row {
+  width: 100%;
+}
+
+.button {
+  transition: 0.3s;
+  font-size: 20px;
+  color: #00FF41;
+}
+.button.bordered {
+  border: 2px solid #00FF41;
+  padding: 10px 15px;
+}
+.button.bordered:hover {
+  background: #00FF41;
+  color: #003B00;
+  text-decoration: none;
 }
 
 .navbar {
@@ -134,10 +170,7 @@ main {
   color: #00FF41;
   font-size: 3rem;
 }
-.text-green {
-  color: #00FF41;
-  font-size: 3rem;
-}
+
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
@@ -198,9 +231,6 @@ main {
 .player-screen .intro .options a {
   padding: 0 15px;
   color: #00FF41;
-}
-.black-outline{
-  text-shadow: 2px 2px 0px #000;
 }
 
 /*# sourceMappingURL=compiled.css.map */
