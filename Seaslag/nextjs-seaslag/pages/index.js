@@ -12,7 +12,6 @@ export default function Home() {
           <title>Account</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-
         <section className={utilStyles.headingMd}>
           <div class="block home">
           <div class="content">
@@ -25,7 +24,6 @@ export default function Home() {
               </div>
               
             </div>
-            
           </div>         
           <Link href="/Game/game"><a className={"button bordered"}>Grid Test</a></Link>
          </div>    

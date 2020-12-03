@@ -171,6 +171,12 @@ main {
   font-size: 3rem;
 }
 
+.text-green {
+  font-family: perfect DOS, sans-serif;
+  color: #00FF41;
+  font-size: 3rem;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
