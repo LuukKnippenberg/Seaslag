@@ -24,7 +24,7 @@ export default function Game() {
           {players.map(i => {
             playerCounter++;
             return (
-              <section className={"player-screen " + "player-" + playerCounter}>
+              <section key={playerCounter} className={"player-screen " + "player-" + playerCounter}>
                 <div className={"intro"}>
                   <h2>Username: {i}</h2>
                   <section className={"options"}>

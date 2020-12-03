@@ -4,14 +4,14 @@ import Layout from '../../components/layout'
 export default function Account() {
   return (
     <Layout>
-      <div className="container">
+      <div className={"container"}>
         <Head>
           <title>Account</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
         <main>
-          <h1 className="title">
+          <h1 className={"title"}>
             Account
           </h1>
           <ul>

@@ -18,18 +18,18 @@ export default function Layout({ children, home }) {
       </Head>
       <header className={styles.header}>
 
-        <div class="navbar">
-          <div class="logo"><h1>Seaslag</h1></div>
-          <div class="menu">
+        <div className={"navbar"}>
+          <div className={"logo"}><h1>Seaslag</h1></div>
+          <div className={"menu"}>
             <ul>
-              <li class="menu-item">
+              <li className={"menu-item"}>
                 <Link href="/">
                   <a>Home</a>
                 </Link>
               </li>
             </ul>
           </div>
-          <div class="profile">
+          <div className={"profile"}>
                 <Link href="/account">
                   <a>@username</a>
                 </Link>

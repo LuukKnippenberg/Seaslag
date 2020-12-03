@@ -197,6 +197,9 @@ main {
 .grid-item.preview {
   background-color: #00FF41;
 }
+.grid-item.selected {
+  background-color: #00FF41;
+}
 
 .gameview {
   display: flex;

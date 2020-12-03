@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import React from 'react'
+import React, { setState } from 'react'
 import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 
@@ -9,27 +9,28 @@ const gridSizeVertical = 10;
 class GridComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {grid: GenerateGrid(gridSizeHorizontal, gridSizeVertical )};
+    this.state = {
+      grid: GenerateGrid(gridSizeHorizontal, gridSizeVertical )
+    };
   }
   render(){
     return (
       <div>
-         <div className="grid">
-           {/* <div className="content" dangerouslySetInnerHTML={{__html: gridString}}></div> */}
+         <div className={"grid"}>
    
-           <div class="grid-container">
+           <div className={"grid-container"}>
              {this.state.grid.map(item => {
-              var selected = item.selected;
-              if(item.selected)
-              {
-                var selectedClass = ""
-              }
-              else
-              {
 
-              }
+              var selected = ReturnBoolState(this.state.grid[item.id].selected, "selected");
+              var hover = ReturnBoolState(this.state.grid[item.id].hover, "hover");
+
               return (
-                  <a  id={"x-" + item.x + " y-" + item.y + " id-" + item.id} className={"grid-item " + this.state.grid[item.id].hover} onMouseEnter={() => this.state.grid[item.id].hover = 1 + console.log(this.state.grid[item.id].hover)}></a>
+                  <a  key={this.state.grid[item.id].id} 
+                      id={"x-" + item.x + " y-" + item.y + " id-" + item.id} 
+                      className={"grid-item " + this.state.grid[item.id].id + " " + selected} 
+                      onMouseEnter={() => this.state.grid[item.id].hover = 1 + console.log(this.state.grid[item.id].id)}
+                      onClick={() => this.setState({grid: ToggleSelected(this.state.grid, item)})}>
+                  </a>
               );
              })}
            </div>
@@ -50,7 +51,7 @@ function GenerateGrid(horizontal, vertical){
   {
     for(var x = 0; x < horizontal; x++)
     {
-      var gridItem = {id: parseInt("" + y + x), item: "test", x: x, y: y, selected: 0, hover: 0}
+      var gridItem = {id: parseInt("" + y + x), item: "test", x: x, y: y, selected: false, hover: 0}
       tempGrid.push(gridItem)
     }
   }
@@ -58,13 +59,34 @@ function GenerateGrid(horizontal, vertical){
   return tempGrid;
 }
 
-function GridItemClickEventHandler(item){
-  item.selected = 1;
-  console.log(item.id, item.selected)
+function ToggleSelected(grid, item)
+{
 
-  ToggleSelected()
+  grid.forEach(function(item)
+  {
+    item.selected = false;
+  });
+
+  if(item.selected == true)
+  {
+    grid[item.id].selected = false;
+    return grid;
+  }
+  else
+  {
+    grid[item.id].selected = true;
+    return grid;
+  }
+
 }
 
-function ToggleSelected(){
-
+function ReturnBoolState(selectionState, message){
+  if(selectionState)
+  {
+    return message;
+  }
+  else
+  {
+    return "";
+  }
 }
