@@ -22,8 +22,10 @@ export default function Home() {
               <div class ="col">
                 <Link href="/Game/creategame"><a className={"button bordered"}>create Game</a></Link>
               </div>
+              
             </div>
           </div>         
+          <Link href="/Game/game"><a className={"button bordered"}>Grid Test</a></Link>
          </div>    
         </section>
       </div>
