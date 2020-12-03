@@ -25,17 +25,8 @@ export default function Game() {
             playerCounter++;
             return (
               <section key={playerCounter} className={"player-screen " + "player-" + playerCounter}>
-                <div className={"intro"}>
-                  <h2>Username: {i}</h2>
-                  <section className={"options"}>
-                    <a onClick={() => SelectBoat(2)} href={"#"}>2</a>
-                    <a onClick={() => SelectBoat(3)} href={"#"}>3</a> 
-                    <a onClick={() => SelectBoat(4)} href={"#"}>4</a> 
-                    <a onClick={() => SelectBoat(6)} href={"#"}>6</a>
-                  </section>
-                </div>
-                
-                <GridComponent />
+                             
+                <GridComponent players={players} playerId={i}/>
               </section>
             );
           })}
@@ -43,8 +34,4 @@ export default function Game() {
       </div>
     </Layout>
   )
-}
-
-function SelectBoat(size){
-  alert('Boat size: ' + size);
 }
