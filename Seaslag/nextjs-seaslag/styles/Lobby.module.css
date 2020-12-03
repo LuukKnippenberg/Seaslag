@@ -52,8 +52,22 @@
     border: 2px solid #00FF41;
     transition-duration: 0.4s;
 }
+.button:disabled {
+    padding: 15px 32px;
+    font-family: perfect DOS, sans-serif;
+    text-align: center;
+    font-size: 25px;
+    background-color: #00000000;
+    color: grey;
+    border: 2px solid grey;
+    transition-duration: 0.4s;
+}
 .button:hover {
     background-color: #00FF41;
+    color: black;
+}
+.button:hover:disabled{
+    background-color: grey;
     color: black;
 }
 .center{
