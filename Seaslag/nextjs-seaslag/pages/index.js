@@ -18,7 +18,7 @@ export default function Home() {
           <div class="content">
             <div class="row">
               <div class="col">
-                <Link href="/Game/joingame"><a className={"button bordered"}>Join Game</a></Link>
+                <Link href="/Game/Joingame"><a className={"button bordered"}>Join Game</a></Link>
               </div>
               <div class ="col">
                 <Link href="/Game/creategame"><a className={"button bordered"}>create Game</a></Link>

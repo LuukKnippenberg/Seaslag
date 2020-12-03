@@ -1,24 +1,31 @@
 import Head from 'next/head'
 import Layout from '../../components/layout'
 import styles from '../../styles/Lobby.module.css'
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router'
+import io from 'socket.io-client';
+
+const socketIP = "ws://145.220.75.122"
+const socket = io(socketIP)
 
 
-  var UsedImage = 'url("/images/MapImages/Omaha Beach.jpg")'
-  var Players = [
-    "Danillo",
-    "Luuk",
-    "Jaron"
-  ]
-  var PlayerStatus = [
-    true,
-    false,
-    true
-  ]
-  var LobbyCode = "A1B2"
-  var IsHost = false;
-  
-  if(IsHost){
-    var buttonText = "Start"
+var UsedImage = 'url("/images/MapImages/Omaha Beach.jpg")'
+var Players = [
+  "Danillo",
+  "Luuk",
+  "Jaron"
+]
+var PlayerStatus = [
+  false,
+  true,
+  true
+]
+var LobbyCode = "A1B2"
+var IsHost = true;
+
+for (var i = 0; i < Players.length; i++) {
+  if (PlayerStatus[i]) {
+    Players[i] += " ✔"
   } else {
     Players[i] += " ❌"
   }
@@ -58,9 +65,29 @@ function Button() {
     )
   }
 }
+var token
 
 
-export default function Lobby() {
+function Lobby() {
+  const [Users = setUsers] = useState(["", "", ""])
+
+  const router = useRouter()
+  const token = router.query.token
+  socket.on('connect', function (){
+    console.log('connected')
+    console.log(socket.id)
+    console.log(socket.emit("token", token));
+    console.log(socket.on("game_info", function(data) {
+      console.log(data)
+    }));
+  })
+  // useEffect(() => {
+  //   console.log(socket.emit("token", token));
+  //   console.log(socket.id)
+  //   console.log(socket.on("game_info", function(data) {
+  //     console.log(data)
+  //   }));
+  // });
   return (
     <Layout>
       <div className="container">
@@ -79,11 +106,11 @@ export default function Lobby() {
               </div>
               <div className={`${styles.row} text-green ${styles.textSmall}`}>
                 <div style={{ marginTop: 0 }} className={`${styles.collg} ${styles.textLeft}`}>
-                  Player 1: {Players[0]}
+                  Player 1: {Users[0]}
                   <br />
-                  Player 2: {Players[1]}
+                  Player 2: {Users[1]}
                   <br />
-                  Player 3: {Players[2]}
+                  Player 3: {Users[2]}
                   <br />
                   Player 4: You
                 </div>
@@ -103,3 +130,5 @@ export default function Lobby() {
     </Layout>
   )
 }
+
+export default Lobby
