@@ -1,20 +1,32 @@
 import Head from 'next/head'
 import Layout from '../../components/layout'
+import styles from '../../styles/Creategame.module.css'
 
 export default function Result() {
   return (
     <Layout>
       <div className="container">
         <Head>
-          <title>Result</title>
+          <title>Victory</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
         <main>
-          <h1 className="title">
-            Results
-          </h1>
-          <p>Gewonnen lekker bezig hoor.</p>
+          <div class="block">
+            <form method="POST" id="resultForm">
+              <div class="content">
+                <p className={`text-green ${styles.mt2} ${styles.textCenter}`}>
+                  Victory
+              </p> 
+              <div class = "content" >
+              <p className={`text-green ${styles.mt2} ${styles.textCenter}`}  >
+                  
+                  Return to home screen
+              </p>
+              </div>
+              </div>
+            </form>
+          </div>
         </main>
       </div>
     </Layout>

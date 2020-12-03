@@ -26,6 +26,7 @@ export default function Layout({ children, home }) {
                 <Link href="/">
                   <a>Home</a>
                 </Link>
+               
               </li>
             </ul>
           </div>
@@ -33,6 +34,7 @@ export default function Layout({ children, home }) {
                 <Link href="/account">
                   <a>@username</a>
                 </Link>
+                
           </div>
         </div>
         
