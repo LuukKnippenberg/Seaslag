@@ -12,9 +12,6 @@ body {
 html {
   height: 100%;
 }
-div{
-  font-family: perfect DOS, sans-serif;
-}
 
 p {
   font-family: perfect DOS, sans-serif;
@@ -45,6 +42,7 @@ ul {
   margin: 0;
   padding: 0;
   display: flex;
+  flex-direction: column;
 }
 ul li {
   text-decoration: none;
@@ -72,6 +70,45 @@ button {
 button:hover {
   background-color: #C4C4C4;
   transition: 0.3s;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.row.space-between {
+  align-content: space-between;
+}
+.row .col {
+  display: flex;
+}
+
+.content {
+  width: 100%;
+}
+
+.block.home .col {
+  width: 50%;
+  justify-content: center;
+  align-content: center;
+}
+.block.home .row {
+  width: 100%;
+}
+
+.button {
+  transition: 0.3s;
+  font-size: 20px;
+  color: #00FF41;
+}
+.button.bordered {
+  border: 2px solid #00FF41;
+  padding: 10px 15px;
+}
+.button.bordered:hover {
+  background: #00FF41;
+  color: #003B00;
+  text-decoration: none;
 }
 
 .navbar {
@@ -111,9 +148,11 @@ button:hover {
 }
 
 main {
-  max-width: 1280px;
   margin: 0 auto;
   min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .block {
@@ -131,11 +170,13 @@ main {
   color: #00FF41;
   font-size: 3rem;
 }
+
 .text-green {
   font-family: perfect DOS, sans-serif;
   color: #00FF41;
   font-size: 3rem;
 }
+
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
@@ -153,9 +194,49 @@ main {
   font-size: 30px;
   text-align: center;
   height: 50px;
+  transition: 0.3s;
 }
-.black-outline{
-  text-shadow: 2px 2px 0px #000;
+.grid-item:hover {
+  background-color: #00FF41;
+  cursor: pointer;
+}
+.grid-item.preview {
+  background-color: #00FF41;
+}
+
+.gameview {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.player-screen {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  padding: 25px;
+}
+.player-screen .intro {
+  width: 500px;
+  background-color: #003B00;
+  color: #00FF41;
+  border-radius: 15px;
+  margin: 0 0 15px;
+  padding: 15px 15px;
+}
+.player-screen .intro h1, .player-screen .intro h2 {
+  color: #00FF41;
+  font-size: 2rem;
+  margin: 0;
+  padding: 0;
+}
+.player-screen .intro .options {
+  display: flex;
+  flex-direction: row;
+}
+.player-screen .intro .options a {
+  padding: 0 15px;
+  color: #00FF41;
 }
 
 /*# sourceMappingURL=compiled.css.map */

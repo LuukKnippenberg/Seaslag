@@ -3,22 +3,32 @@ import Link from 'next/link'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 
+
 export default function Home() {
   return (
-    <Layout home>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
--      <section className={utilStyles.headingMd}>
-        <div class="block">
+    <Layout>
+      <div className="container">
+        <Head>
+          <title>Account</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+
+        <section className={utilStyles.headingMd}>
+          <div class="block home">
           <div class="content">
-            <p>Username: Lorem Ipsum</p>
-            <p>Password: ********</p>
-            <p>Press enter to submit</p>
-          </div>
+            <div class="row">
+              <div class="col">
+                <Link href="/Game/joingame"><a className={"button bordered"}>Join Game</a></Link>
+              </div>
+              <div class ="col">
+                <Link href="/Game/creategame"><a className={"button bordered"}>create Game</a></Link>
+              </div>
+            </div>
           
-        </div>
-      </section>
+          </div>         
+         </div>    
+        </section>
+      </div>
     </Layout>
   )
 }
