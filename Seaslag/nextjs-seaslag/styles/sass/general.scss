@@ -78,6 +78,51 @@ button {
 	}
 }
 
+.row {
+	display: flex;
+	flex-direction: row;
+	&.space-between{
+		align-content: space-between;
+	}
+	.col{
+		display: flex;
+
+	}
+}
+
+.content{
+	width: 100%;
+}
+
+.block.home{
+	.col{
+		width:50%;
+		justify-content: center;
+		align-content: center;
+	}
+	.row{
+		width: 100%;
+		
+	}
+	
+}
+
+.button{
+	transition: 0.3s;
+	font-size:20px;
+	color: $greenLight;
+
+	&.bordered{
+		border:2px solid $greenLight;		
+		padding: 10px 15px;
+		&:hover{
+			background: $greenLight;
+			color: $greenDark;
+			text-decoration: none;
+		}
+	}
+}
+
 header {
 
 }

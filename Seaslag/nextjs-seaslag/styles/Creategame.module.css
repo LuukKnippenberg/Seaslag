@@ -3,7 +3,7 @@
     flex-direction: row;
 }
 
-.textSmall{
+.textSmall {
     font-size: 200%;
 }
 
@@ -39,11 +39,25 @@
     margin-right: auto;
 }
 
+.pt0{
+    padding-top: 0;
+}
+
+.pt1{
+    padding-top:  (16px * .25);
+}
+
+.pt2{
+    padding-top:  (16px * .5);
+}
+
+.pt3{
+    padding-top:  16px;
+}
+
 .textCenter {
     text-align: center;
 }
-
-/* HIDE RADIO */
 
 .mapSelector {
     position: absolute;
@@ -52,32 +66,58 @@
     height: 0;
 }
 
-/* IMAGE STYLES */
-
 .mapSelector+div {
     cursor: pointer;
 }
-
-/* CHECKED STYLES */
 
 .mapSelector:checked+div {
     outline: 4px solid #00FF41;
 }
 
-.imageContainer{
-    width:160px; 
-    height:280px;
+.imageContainer {
+    width: 160px;
+    height: 280px;
 }
-.Hawaii{
+
+.Hawaii {
     background-image: url("/images/MapImages/Hawaii Sea.jpg");
 }
-.Siberia{
+
+.Siberia {
     background-image: url("/images/MapImages/Siberia Sea.jpg");
 }
-.Omaha{
+
+.Omaha {
     background-image: url("/images/MapImages/Omaha Beach.jpg");
 }
 
-.HoverBlack:hover{
-color:#000;
+.HoverBlack:hover {
+    color: #000;
 }
+
+.submitButton {
+    padding: 15px 32px;
+    font-family: perfect DOS, sans-serif;
+    text-align: center;
+    font-size: 25px;
+    background-color: #00000000;
+    color: #00FF41;
+    border: 2px solid #00FF41;
+    transition-duration: 0.4s;
+}
+
+.submitButton:hover {
+    background-color: #00FF41;
+    color: black;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.inputNumber{
+    background-color: #00000000;
+}
+
