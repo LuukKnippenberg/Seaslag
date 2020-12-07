@@ -1,9 +1,19 @@
 import Head from 'next/head'
 import Layout from '../../components/layout'
 import styles from '../../styles/Creategame.module.css'
+import axios from 'axios'
 
 export default function CreateGame() {
 
+  function HostGame(){
+    console.log('debug')
+    axios.post('http://145.220.75.122/host-game',{
+      "username": 'John Doe',
+    })
+    .then(res => {
+      console.log(res.data.token)
+    })
+  }
 
   return (
     <Layout>
@@ -45,9 +55,15 @@ export default function CreateGame() {
                 </div>
                 <div className={`${styles.center} ${styles.pt3}`}>
                   <input className={`${styles.submitButton}`} type="submit" value="Press Enter to submit"></input>
+                  
                 </div>
               </div>
             </form>
+            <button
+                  onClick={HostGame}
+                  >
+
+                  </button>
           </div>
         </main>
       </div>

@@ -3,7 +3,7 @@ import Layout from '../../components/layout'
 import GridComponent from '../../components/grid'
 import { useState } from 'react';
 
-const amountOfPlayers = 4; 
+const amountOfPlayers = 4;
 
 
 export default function Game() {
@@ -11,7 +11,7 @@ export default function Game() {
   var playerCounter = 0;
 
   const selectedBoat = useState(true);
-  
+
   return (
     <Layout>
       <div className="container">
@@ -34,4 +34,3 @@ export default function Game() {
       </div>
     </Layout>
   )
-}
