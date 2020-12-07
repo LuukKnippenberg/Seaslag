@@ -1,77 +1,77 @@
-import dynamic from 'next/dynamic'
 import Layout from '../../components/layout'
-import React, { useState } from 'react';
-import GameViewImport from './gameview'
+import React from 'react';
 import styles from '../../styles/joingame.module.css'
-import axios from 'axios'
-import Link from 'next/Link'
 import Router from 'next/router'
+import jsCookie from 'js-cookie'
 
+if(jsCookie.get('token') != null){
+  jsCookie.remove('token')
+}
 
 var gameCode
 var Username
 
-var ref="/Game/lobby?token="
+function JoinGame() {
+  var axios = require('axios');
+  var data = JSON.stringify({ "username": Username.toString(), "game_code": gameCode.toString() });
 
-function JoinGame(GameCode) {
-  const {} = Router
-  axios.post('http://145.220.75.122/join-game', {
-    "username": Username,
-    "game_code": GameCode
-  })
-    .then(res => {
-      console.log(`statusCode: ${res.data.token}`)
-      console.log(res)
-      ref += res.data.token
-      console.log(ref)
-      
-      Router.push(ref+=res.data.token)
+  var config = {
+    method: 'post',
+    url: 'http://145.220.75.122/join-game',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data
+  };
+
+  axios(config)
+    .then(function (response) {
+      console.log(response.data.token);
+      jsCookie.set('token', response.data.token)
+      redirectToLobby()
     })
-  }
+    .catch(function (error) {
+      console.log(error);
+
+    });
+}
 
 function HostGame() {
-  const {} = Router
+  var axios = require('axios');
   axios.post('http://145.220.75.122/host-game', {
     "username": Username,
   })
     .then(res => {
+      jsCookie.set('token', res.data.token)
       console.log(res.data.token)
-      ref += res.data.token
-      console.log(ref)
-      Router.push(ref+=res.data.token)
+      redirectToLobby()
     })
+}
+
+function redirectToLobby(){
+  Router.push("/Game/lobby")
 }
 
 
 export default function Home() {
+  jsCookie.remove('token')
 
   function GameCodeChange(event) {
     gameCode = event.target.value
-    console.log(gameCode)
   }
 
   function HandleNameChange(event) {
     Username = event.target.value
-    console.log(Username)
   }
 
-
   const HostButton =
-      <button style={{ marginRight: 15 }} className={styles.submitButton}
-        onClick={() => {
-          HostGame();
-        }}
-      >
-        Host
+    <button style={{ marginRight: 15 }} className={styles.submitButton} onClick={() => { HostGame() }}>
+      Host
       </button>
 
   const JoinButton =
-      <button className={styles.submitButton}
-        onClick={() => {
-          JoinGame(gameCode);
-        }}
-      >
-        Join
+    <button className={styles.submitButton} onClick={() => { JoinGame(); }}>
+      Join
       </button>
   return (
     <Layout>
