@@ -220,6 +220,10 @@ main{
 	&.preview{
 		background-color: $greenLight;
 	}
+
+	&.selected{
+		background-color: $greenLight;
+	}
 }
 
 .gameview{
