@@ -10,64 +10,96 @@ const socket = io(socketIP)
 
 var token = jsCookie.get('token')
 
-var UsedImage = 'url("/images/MapImages/Omaha Beach.jpg")'
 
-function Button() {
-  return (
-    <button style={{ bottom: 25 }} className={`${styles.button} ${styles.center} ${styles.posAbso}`}>
-      Ready
-    </button>
-  )
-}
 socket.on('connect', function () {
   console.log('connected to socket!')
 })
 var players = []
 
 function Lobby() {
-  token = jsCookie.get('token')
+  var playerIndex = -1;
+  const [readyState, setReadyState] = useState("Ready")
 
-  const [playerDiv, setPlayerDiv] = useState(<div></div>)
+  function emitReadyState(state) {
+    socket.emit("ready",
+      {
+        "ready": state,
+      })
+  }
 
-  function changePlayers(playersArray) {
-    switch (playersArray.length) {
-      case 0:
-        setPlayerDiv(<div>
-        </div>)
+  function HandleReadyStateChange() {
+    switch (readyState) {
+      case "Ready":
+        emitReadyState(true)
+        setReadyState("Unready")
         break;
-      case 1:
-        setPlayerDiv(<div>
-          <div>Player 1: {playersArray[0].name}</div>
-        </div>)
+      case "Unready":
+        emitReadyState(false)
+        setReadyState("Ready")
         break;
-      case 2:
-        setPlayerDiv(<div>
-          <div>Player 1: {playersArray[0].name}</div>
-          <div>Player 2: {playersArray[1].name}</div>
-        </div>)
-        break;
-      case 3:
-        setPlayerDiv(<div>
-          <div>Player 1: {playersArray[0].name}</div>
-          <div>Player 2: {playersArray[1].name}</div>
-          <div>Player 3: {playersArray[2].name}</div>
-        </div>)
-        break;
-      case 4:
-        setPlayerDiv(<div>
-          <div>Player 1: {playersArray[0].name}</div>
-          <div>Player 2: {playersArray[1].name}</div>
-          <div>Player 3: {playersArray[2].name}</div>
-          <div>Player 4: {playersArray[3].name}</div>
-        </div>)
-        break;
+        emitReadyState(true)
+        setReadyState("Ready")
+        break
     }
   }
+
+  function Button() {
+    return (
+      <button style={{ bottom: 25 }} className={`${styles.button} ${styles.center} ${styles.posAbso}`} onClick={() => HandleReadyStateChange()}>
+        {readyState}
+      </button>
+    )
+  }
+  token = jsCookie.get('token')
+
+  const [player1, setPlayer1] = useState({
+    "name": "",
+    "ready": ""
+  })
+  const [player2, setPlayer2] = useState({
+    "name": "",
+    "ready": ""
+  })
+  const [player3, setPlayer3] = useState({
+    "name": "",
+    "ready": ""
+  })
+  const [player4, setPlayer4] = useState({
+    "name": "",
+    "ready": ""
+  })
 
   const [GameData, setGameData] = useState({
     players: [],
     game_code: "",
-    self_index: - 1,
+    self_index: -1,
+  })
+
+  useEffect(() => {
+    socket.on("player_ready", data => {
+      switch (data.index) {
+        case 0:
+          var playerData = player1
+          playerData.ready = data.ready.toString()
+          setPlayer1(playerData)
+          break;
+        case 1:
+          var playerData = player2
+          playerData.ready = data.ready.toString()
+          setPlayer2(playerData)
+          break;
+        case 2:
+          var playerData = player3
+          playerData.ready = data.ready.toString()
+          setPlayer3(playerData)
+          break;
+        case 3:
+          var playerData = player4
+          playerData.ready = data.ready.toString()
+          setPlayer4(playerData)
+          break;
+      }
+    })
   })
   useEffect(() => {
     socket.emit('token', token)
@@ -78,19 +110,45 @@ function Lobby() {
     socket.on("game_info", data => {
       console.log('game info obtained')
       setGameData(data)
-      players = data.players
-      changePlayers(players)
-    })
-  })
-  useEffect(() =>{
-    socket.on("player_joined", data =>{
-      for(var i =0; i < players.length; i++){
-        if(players[i] == data){
-          return;
+      playerIndex = data.self_index
+      for (var i = 0; i < data.players.length; i++) {
+        var playerData = {
+          "name" : data.players[i].name,
+          "ready": data.players[i].ready.toString()
+        }
+        switch (i) {
+          case 0:
+            setPlayer1(playerData)
+            break;
+          case 1:
+            setPlayer2(playerData)
+            break;
+          case 2:
+            setPlayer3(playerData)
+            break;
+          case 3:
+            setPlayer4(playerData)
+            break;
         }
       }
-      players.push(data)
-      changePlayers(players)
+    })
+  })
+  useEffect(() => {
+    socket.on("player_joined", data => {
+      switch (data.index) {
+        case 0:
+          setPlayer1(data)
+          break;
+        case 1:
+          setPlayer2(data)
+          break;
+        case 2:
+          setPlayer3(data)
+          break;
+        case 3:
+          setPlayer4(data)
+          break;
+      }
     })
   })
 
@@ -110,19 +168,28 @@ function Lobby() {
                   Code: {GameData.game_code}
                 </p>
               </div>
-              <div className={`${styles.row} text-green ${styles.textSmall}`}>
-                <div style={{ marginTop: 0 }} className={`${styles.collg} ${styles.textLeft}`}>
-                  {playerDiv}
-                </div>
-                <div className={`${styles.colsm} ${styles.textCenter}`}>
-                  {/* <div style={{ marginLeft: "auto", marginRight: 0, backgroundImage: UsedImage }} className={`black-outline ${styles.mapImg}`}> Map: Omaha</div> */}
+              <div className={`${styles.textCenter} text-green ${styles.textSmall}`}>
+                <div style={{ marginTop: 0 }}>
+                  <div className={styles.row}>
+                    <div className={styles.col}>
+                      <div>{player1.name}</div><br />
+                      <div>{player2.name}</div><br />
+                      <div>{player3.name}</div><br />
+                      <div>{player4.name}</div><br />
+                    </div>
+                    <div className={styles.col}>
+                      <div>{player1.ready}</div><br />
+                      <div>{player2.ready}</div><br />
+                      <div>{player3.ready}</div><br />
+                      <div>{player4.ready}</div><br />
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className={`${styles.center} `}>
                 <Button>
 
                 </Button>
-
               </div>
             </div>
           </div>

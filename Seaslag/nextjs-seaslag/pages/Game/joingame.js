@@ -4,7 +4,7 @@ import styles from '../../styles/joingame.module.css'
 import Router from 'next/router'
 import jsCookie from 'js-cookie'
 
-if(jsCookie.get('token') != null){
+if (jsCookie.get('token') != null) {
   jsCookie.remove('token')
 }
 
@@ -23,7 +23,6 @@ function JoinGame() {
     },
     data: data
   };
-
   axios(config)
     .then(function (response) {
       console.log(response.data.token);
@@ -32,7 +31,6 @@ function JoinGame() {
     })
     .catch(function (error) {
       console.log(error);
-
     });
 }
 
@@ -48,7 +46,7 @@ function HostGame() {
     })
 }
 
-function redirectToLobby(){
+function redirectToLobby() {
   Router.push("/Game/lobby")
 }
 
