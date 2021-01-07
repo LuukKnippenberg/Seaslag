@@ -10,71 +10,72 @@ class GridComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      grid: GenerateGrid(gridSizeHorizontal, gridSizeVertical ),
+      grid: GenerateGrid(gridSizeHorizontal, gridSizeVertical),
       ships: [
-        {id: 0, hitpoints: 2, damage: [0, 2], coordinates: []},
-        {id: 1, hitpoints: 3, damage: [0, 1], coordinates: []},
-        {id: 2, hitpoints: 3, damage: [0, 1], coordinates: []},
-        {id: 3, hitpoints: 4, damage: [0, 1], coordinates: []},
-        {id: 4, hitpoints: 4, damage: [0, 1], coordinates: []},
-        {id: 5, hitpoints: 5, damage: []}
+        { id: 0, hitpoints: 2, damage: [0, 2], coordinates: [], isVertical: true },
+        { id: 1, hitpoints: 3, damage: [0, 1], coordinates: [], isVertical: false },
+        { id: 2, hitpoints: 3, damage: [0, 1], coordinates: [], isVertical: false },
+        { id: 3, hitpoints: 4, damage: [0, 1], coordinates: [], isVertical: false },
+        { id: 4, hitpoints: 4, damage: [0, 1], coordinates: [], isVertical: false },
+        { id: 5, hitpoints: 5, damage: [0, 1], coordinates: [], isVertical: false }
       ],
       selectedShip: 0
     };
   }
-  render(){
+  render() {
     return (
       <div>
-          <div className={"intro"}>
-            <h2>Username: {this.props.playerId}</h2>
-            <section className={"options"}>
+        <div className={"intro"}>
+          <h2>Username: {this.props.playerId}</h2>
+          <section className={"options"}>
 
-              {this.state.ships.map(item => { 
+            {this.state.ships.map(item => {
 
-                return(
-                  <a onClick={() => this.state.selectedShip = item.id} href={"#"}>{item.hitpoints}</a>
-                );
-                
-              })}
-            </section>
-          </div>
+              return (
+                <a onClick={() => this.state.selectedShip = item.id} href={"#"}>{item.hitpoints}</a>
+              );
 
-         <div className={"grid"}>
-           <div className={"grid-container"}>
-             {this.state.grid.map(item => {
+            })}
+          </section>
+        </div>
+
+        <div className={"grid"}>
+          <div className={"grid-container"}>
+            {this.state.grid.map(item => {
 
               var selectedShip = this.state.ships[this.state.selectedShip];
               var selected = ReturnBoolState(this.state.grid[item.id].selected, "selected");
               var hover = ReturnBoolState(this.state.grid[item.id].hover, "preview");
 
               return (
-                  <a  key={this.state.grid[item.id].id} 
-                      id={"x-" + item.x + " y-" + item.y + " id-" + item.id} 
-                      className={"grid-item " + this.state.grid[item.id].id + " " + selected + " " + hover} 
-                      onMouseEnter={() => this.setState({grid: ToggleHover(this.state.grid, item, selectedShip.hitpoints)})}
-                      onClick={() => this.setState({grid: ToggleSelected(this.state.grid, item, selectedShip.hitpoints)})}>
-                  </a>
+                <a key={this.state.grid[item.id].id}
+                  id={"x-" + item.x + " y-" + item.y + " id-" + item.id}
+                  className={"grid-item " + this.state.grid[item.id].id + " " + selected + " " + hover}
+                  onMouseEnter={() => this.setState({ grid: ToggleHover(this.state.grid, item, selectedShip.hitpoints) })}
+                  onClick={() => {
+                    this.setState({ grid: ToggleSelected(this.state.grid, item, selectedShip.hitpoints, selectedShip) })
+                    DrawGrid(this.state.grid, this.state.ships)
+                  }}>
+                </a>
               );
-             })}
-           </div>
-   
-         </div>
-       </div>
-     )
+            })}
+          </div>
+
+        </div>
+      </div>
+    )
   }
 }
 
 export default GridComponent;
 
-function GenerateGrid(horizontal, vertical){
+function GenerateGrid(horizontal, vertical) {
 
   var tempGrid = [];
 
-  for(var y = 0; y < vertical; y++)
-  {
-    for(var x = 0; x < horizontal; x++)
-    {
-      var gridItem = {id: parseInt("" + y + x), item: "test", x: x, y: y, selected: false, hover: 0}
+  for (var y = 0; y < vertical; y++) {
+    for (var x = 0; x < horizontal; x++) {
+      var gridItem = { id: parseInt("" + y + x), item: "test", coordinate: {"x": x, "y": y}, selected: false, hover: 0 }
       tempGrid.push(gridItem)
     }
   }
@@ -82,50 +83,103 @@ function GenerateGrid(horizontal, vertical){
   return tempGrid;
 }
 
-function ToggleSelected(grid, item, size)
-{
+function ToggleSelected(grid, item, size, ship) {
+  ship.coordinates = [item.coordinate.x, item.coordinate.y]
+  console.log()
+  // grid.forEach(function(item)
+  // {
+  //   item.selected = false;
+  // });
 
-  grid.forEach(function(item)
-  {
-    item.selected = false;
-  });
-
-  if(item.selected == true)
-  {
+  if (item.selected == true) {
     grid[item.id].selected = false;
     return grid;
   }
-  else
-  {
-    for(var i = 0; i < size; i++)
-    {
+  else {
+    for (var i = 0; i < size; i++) {
       var index = item.id + i;
-      if(IfExists(grid[index]))
-      {
+      if (IfExists(grid[index])) {
         grid[index].selected = true;
       }
     }
 
     grid[item.id].selected = true;
+    ship.placeble = false;
     return grid;
   }
 
 }
 
+function findGridSquare(gridSquare, shipCoordinate) {
+  return gridSquare.coordinate == shipCoordinate
+}
 
-function ToggleHover(grid, item, size)
-{
 
-  grid.forEach(function(item)
-  {
+function DrawGrid(grid, ships) {
+  grid.forEach(function (gridSquare) {
+    gridSquare.selected = false;
+  });
+
+
+  ships.forEach(function (ship) {
+    var toDrawSquares = []
+    var coordinates = {"x": ship.coordinates[0], "y": ship.coordinates[1]}
+    var origin = grid.find(function (gridSquare) {return (gridSquare.coordinate.x == coordinates.x && gridSquare.coordinate.y == coordinates.y)})
+    console.log(origin)
+    if(origin != undefined){
+      toDrawSquares.push(origin)
+    }
+
+    console.log(ship.hitpoints)
+
+    for (var i = 0; i < ship.hitpoints; i++) {
+      switch (ship.isVertical) {
+        case true:
+          var square = grid.find(function (gridSquare) { return (gridSquare.coordinate.x == ship.coordinates[0] && gridSquare.coordinate.y == ship.coordinates[1] + i)})
+          console.log(square)
+          if(square != undefined){
+            toDrawSquares.push(square)
+          }
+          break;
+        case false:
+          var square = grid.find(function (gridSquare) { return (gridSquare.coordinate.x == ship.coordinates[0] +i && gridSquare.coordinate.y == ship.coordinates[1]) })
+          console.log(square)
+          if(square != undefined){
+            toDrawSquares.push(square)
+          }
+          break;
+      }
+      // grid.forEach(function (gridSquare) {
+      //   if (ship.coordinates == gridSquare.coordinate) {
+      //     for (var i = 0; i < ship.size; i++) {
+      //       switch (ship.isVertical) {
+      //         case true:
+      //           break;
+      //         case false:
+      //           break;
+      //       }
+      //     }
+      //   }
+      // })
+
+    }
+    console.log(toDrawSquares)
+    toDrawSquares.forEach(function (gridSquare){
+      gridSquare.selected = true
+    })
+  })
+}
+
+
+function ToggleHover(grid, item, size) {
+
+  grid.forEach(function (item) {
     item.hover = false;
   });
 
-  for(var i = 0; i < size; i++)
-  {
+  for (var i = 0; i < size; i++) {
     var index = item.id + i;
-    if(IfExists(grid[index]))
-    {
+    if (IfExists(grid[index])) {
       grid[index].hover = true;
     }
   }
@@ -136,28 +190,24 @@ function ToggleHover(grid, item, size)
 }
 
 
-function ReturnBoolState(selectionState, message){
-  if(selectionState)
-  {
+function ReturnBoolState(selectionState, message) {
+  if (selectionState) {
     return message;
   }
-  else
-  {
+  else {
     return "";
   }
 }
 
-function IfExists(item){
-  if(item)
-  {
+function IfExists(item) {
+  if (item) {
     return true;
   }
-  else
-  {
+  else {
     return false;
   }
 }
 
-function SelectBoat(size){
+function SelectBoat(size) {
   alert('Boat size: ' + size);
 }
