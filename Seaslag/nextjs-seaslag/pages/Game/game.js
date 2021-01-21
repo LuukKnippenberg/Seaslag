@@ -1,15 +1,17 @@
 import Head from 'next/head'
 import Layout from '../../components/layout'
 import GridComponent from '../../components/grid'
+import { useState } from 'react';
 
-const amountOfPlayers = 4; 
+const amountOfPlayers = 4;
 
 
 export default function Game() {
-
   const players = ["Jaron", "Justin", "Tijn", "Luc"]
   var playerCounter = 0;
-  
+
+  const selectedBoat = useState(true);
+
   return (
     <Layout>
       <div className="container">
@@ -22,12 +24,9 @@ export default function Game() {
           {players.map(i => {
             playerCounter++;
             return (
-              <section className={"player-screen " + "player-" + playerCounter}>
-                <div className={"intro"}>
-                  <h2>Username: {i}</h2>
-                </div>
-                
-                <GridComponent />
+              <section key={playerCounter} className={"player-screen " + "player-" + playerCounter}>
+                             
+                <GridComponent players={players} playerId={i}/>
               </section>
             );
           })}

@@ -72,6 +72,45 @@ button:hover {
   transition: 0.3s;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.row.space-between {
+  align-content: space-between;
+}
+.row .col {
+  display: flex;
+}
+
+.content {
+  width: 100%;
+}
+
+.block.home .col {
+  width: 50%;
+  justify-content: center;
+  align-content: center;
+}
+.block.home .row {
+  width: 100%;
+}
+
+.button {
+  transition: 0.3s;
+  font-size: 20px;
+  color: #00FF41;
+}
+.button.bordered {
+  border: 2px solid #00FF41;
+  padding: 10px 15px;
+}
+.button.bordered:hover {
+  background: #00FF41;
+  color: #003B00;
+  text-decoration: none;
+}
+
 .navbar {
   background: #C4C4C4;
   width: 100%;
@@ -132,6 +171,12 @@ main {
   font-size: 3rem;
 }
 
+.text-green {
+  font-family: perfect DOS, sans-serif;
+  color: #00FF41;
+  font-size: 3rem;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
@@ -153,8 +198,17 @@ main {
 }
 .grid-item:hover {
   background-color: #00FF41;
+  cursor: pointer;
 }
-
+.grid-item.preview {
+  background-color: #00FF41;
+}
+.grid-item.selected {
+  background-color: #00FF41;
+}
+.grid-item.blocked {
+  background-color: #C4C4C466;
+}
 .gameview {
   display: flex;
   flex-direction: row;
@@ -172,7 +226,7 @@ main {
   background-color: #003B00;
   color: #00FF41;
   border-radius: 15px;
-  margin: 15px 0;
+  margin: 0 0 15px;
   padding: 15px 15px;
 }
 .player-screen .intro h1, .player-screen .intro h2 {
@@ -181,5 +235,43 @@ main {
   margin: 0;
   padding: 0;
 }
-
+.player-screen .intro .options {
+  display: flex;
+  flex-direction: row;
+}
+.player-screen .intro .options a {
+  padding: 0 15px;
+  color: #00FF41;
+}
+.button {
+  padding: 15px 32px;
+  font-family: perfect DOS, sans-serif;
+  text-align: center;
+  font-size: 25px;
+  background-color: #00000000;
+  color: #00FF41;
+  border: 2px solid #00FF41;
+  transition-duration: 0.4s;
+}
+.button:disabled {
+  padding: 15px 32px;
+  font-family: perfect DOS, sans-serif;
+  text-align: center;
+  font-size: 25px;
+  background-color: #00000000;
+  color: grey;
+  border: 2px solid grey;
+  transition-duration: 0.4s;
+}
+.button:hover {
+  background-color: #00FF41;
+  color: black;
+}
+.button:hover:disabled{
+  background-color: grey;
+  color: black;
+}
+.text-red{
+  color: red !important;
+}
 /*# sourceMappingURL=compiled.css.map */

@@ -1,0 +1,38 @@
+.input{
+    background-color: #00000000;
+}
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.height100{
+    height: 100%;
+}
+.textCenter{
+    text-align: center !important;
+}
+
+
+.submitButton {
+    padding: 15px 32px;
+    font-family: perfect DOS, sans-serif;
+    text-align: center;
+    font-size: 25px;
+    background-color: #00000000;
+    color: #00FF41;
+    border: 2px solid #00FF41;
+    transition-duration: 0.4s;
+}
+
+.submitButton:hover {
+    background-color: #00FF41;
+    color: black;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

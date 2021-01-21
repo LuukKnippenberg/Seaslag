@@ -78,6 +78,51 @@ button {
 	}
 }
 
+.row {
+	display: flex;
+	flex-direction: row;
+	&.space-between{
+		align-content: space-between;
+	}
+	.col{
+		display: flex;
+
+	}
+}
+
+.content{
+	width: 100%;
+}
+
+.block.home{
+	.col{
+		width:50%;
+		justify-content: center;
+		align-content: center;
+	}
+	.row{
+		width: 100%;
+		
+	}
+	
+}
+
+.button{
+	transition: 0.3s;
+	font-size:20px;
+	color: $greenLight;
+
+	&.bordered{
+		border:2px solid $greenLight;		
+		padding: 10px 15px;
+		&:hover{
+			background: $greenLight;
+			color: $greenDark;
+			text-decoration: none;
+		}
+	}
+}
+
 header {
 
 }
@@ -169,6 +214,15 @@ main{
 
 	&:hover{
 		background-color: $greenLight;
+		cursor: pointer;
+	}
+
+	&.preview{
+		background-color: $greenLight;
+	}
+
+	&.selected{
+		background-color: $greenLight;
 	}
 }
 
@@ -189,7 +243,7 @@ main{
 		background-color: $greenDark;
 		color: $greenLight;
 		border-radius: 15px;
-		margin: 15px 0;
+		margin: 0 0 15px;
 		padding: 15px 15px;
 
 		h1, h2{
@@ -197,6 +251,16 @@ main{
 			font-size: 2rem;
 			margin: 0;
 			padding: 0;
+		}
+
+		.options{
+			display: flex;
+			flex-direction: row;
+
+			a{
+				padding: 0 15px;
+				color: $greenLight;
+			}
 		}
 	}
 }
