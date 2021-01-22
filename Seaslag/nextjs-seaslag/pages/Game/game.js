@@ -7,10 +7,9 @@ const amountOfPlayers = 4;
 
 
 export default function Game() {
-  const players = ["Jaron", "Justin", "Tijn", "Luc"]
+  const players = ["Tijn", "Justin", "Luuk", "Luc"]
   var playerCounter = 0;
 
-  const selectedBoat = useState(true);
 
   return (
     <Layout>

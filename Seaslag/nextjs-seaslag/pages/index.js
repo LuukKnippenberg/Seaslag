@@ -17,7 +17,7 @@ function JoinGame() {
 
   var config = {
     method: 'post',
-    url: 'http://145.220.75.122/join-game',
+    url: 'http://178.62.244.31:5050/join-game',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -36,7 +36,7 @@ function JoinGame() {
 
 function HostGame() {
   var axios = require('axios');
-  axios.post('http://145.220.75.122/host-game', {
+  axios.post('http://178.62.244.31:5050/host-game', {
     "username": Username,
   })
     .then(res => {

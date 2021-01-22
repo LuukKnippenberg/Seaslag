@@ -4,9 +4,14 @@ import styles from '../../styles/Lobby.module.css'
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import jsCookie from 'js-cookie'
+import Game from './game';
+import GridComponent from '../../components/grid';
+import gameview from './gameview';
+import Router from 'next/router'
 
-const socketIP = "ws://145.220.75.122"
+const socketIP = "ws://178.62.244.31:5050"
 const socket = io(socketIP)
+
 
 var token = jsCookie.get('token')
 
@@ -14,10 +19,14 @@ var token = jsCookie.get('token')
 socket.on('connect', function () {
   console.log('connected to socket!')
 })
-var players = []
+
+var self_index = -1;
+
+function ShowBoats(){
+  Router.push("/Game/game")
+}
 
 function Lobby() {
-  var playerIndex = -1;
   const [readyState, setReadyState] = useState("Ready")
 
   function emitReadyState(state) {
@@ -37,6 +46,7 @@ function Lobby() {
         emitReadyState(false)
         setReadyState("Ready")
         break;
+      default:
         emitReadyState(true)
         setReadyState("Ready")
         break
@@ -44,6 +54,13 @@ function Lobby() {
   }
 
   function Button() {
+    if(self_index ==0){
+      return (
+        <button style={{ bottom: 25 }} className={`${styles.button} ${styles.center} ${styles.posAbso}`} onClick={() => ShowBoats()}>
+          {readyState}
+        </button>
+      )
+    }
     return (
       <button style={{ bottom: 25 }} className={`${styles.button} ${styles.center} ${styles.posAbso}`} onClick={() => HandleReadyStateChange()}>
         {readyState}
@@ -108,9 +125,9 @@ function Lobby() {
   })
   useEffect(() => {
     socket.on("game_info", data => {
+      self_index = data.self_index;
       console.log('game info obtained')
       setGameData(data)
-      playerIndex = data.self_index
       for (var i = 0; i < data.players.length; i++) {
         var playerData = {
           "name" : data.players[i].name,
@@ -135,20 +152,28 @@ function Lobby() {
   })
   useEffect(() => {
     socket.on("player_joined", data => {
+      var playerData = {
+        "name" : data.name,
+        "ready": "false"
+      }
       switch (data.index) {
         case 0:
-          setPlayer1(data)
+          setPlayer1(playerData)
           break;
         case 1:
-          setPlayer2(data)
+          setPlayer2(playerData)
           break;
         case 2:
-          setPlayer3(data)
+          setPlayer3(playerData)
           break;
         case 3:
-          setPlayer4(data)
+          setPlayer4(playerData)
           break;
       }
+    })
+  })
+  useEffect(() =>{
+    socket.on("game_start", () =>{
     })
   })
 
@@ -171,18 +196,18 @@ function Lobby() {
               <div className={`${styles.textCenter} text-green ${styles.textSmall}`}>
                 <div style={{ marginTop: 0 }}>
                   <div className={styles.row}>
-                    <div className={styles.col}>
-                      <div>{player1.name}</div><br />
-                      <div>{player2.name}</div><br />
-                      <div>{player3.name}</div><br />
-                      <div>{player4.name}</div><br />
-                    </div>
-                    <div className={styles.col}>
-                      <div>{player1.ready}</div><br />
-                      <div>{player2.ready}</div><br />
-                      <div>{player3.ready}</div><br />
-                      <div>{player4.ready}</div><br />
-                    </div>
+                    <ul className={styles.col}>
+                      <li>{player1.name}</li>
+                      <li>{player2.name}</li>
+                      <li>{player3.name}</li>
+                      <li>{player4.name}</li>
+                    </ul>
+                    <ul className={styles.col}>
+                      <li>{player1.ready}</li>
+                      <li>{player2.ready}</li>
+                      <li>{player3.ready}</li>
+                      <li>{player4.ready}</li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -198,5 +223,6 @@ function Lobby() {
     </Layout>
   )
 }
+
 
 export default Lobby

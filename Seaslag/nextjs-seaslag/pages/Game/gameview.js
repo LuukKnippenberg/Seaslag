@@ -8,26 +8,25 @@ function SelectBoat(size) {
     alert('Boat size: ' + size);
   }
 export default function GameView(){
-    const players = ["Jaron", "Justin", "Tijn", "Luc"]
-    var playerCounter = 0;
+  const players = ["Tijn", "Justin", "Luuk", "Luc"]
+  var playerCounter = 0;
+
   
-    const selectedBoat = useState(true);
-    
-    return (
-      <div className="container">
-        <div className={"gameview"}>
-          {players.map(i => {
-            playerCounter++;
-            return (
-              <section className={"player-screen " + "player-" + playerCounter}>
-                
-  
-                <GridComponent />
-              </section>
-            );
-          })}
-        </div>
+  return (
+    <div className="container">
+      <div className={"gameview"}>
+        {players.map(i => {
+          playerCounter++;
+          return (
+            <section className={"player-screen " + "player-" + playerCounter}>
+              
+
+              <GridComponent />
+            </section>
+          );
+        })}
       </div>
-    )
-  
+    </div>
+  )
+
 }
