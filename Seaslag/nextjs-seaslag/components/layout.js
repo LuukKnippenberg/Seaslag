@@ -22,7 +22,7 @@ export default function Layout({ children, home }) {
           <div className={"logo"}><h1>Seaslag</h1></div>
           <div className={"menu"}>
             <ul>
-              <li className={"menu-item"}>
+              <li className={`menu-item ${styles.center}`}>
                 <Link href="/">
                   <a>Home</a>
                 </Link>
@@ -40,13 +40,7 @@ export default function Layout({ children, home }) {
         
       </header>
       <main>{children}</main>
-      {!home && (
-        <div className={styles.backToHome}>
-          <Link href="/">
-            <a>← Back to home</a>
-          </Link>
-        </div>
-      )}
+      
       {/* <footer>
           
       </footer> */}

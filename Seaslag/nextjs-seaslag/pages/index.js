@@ -1,34 +1,105 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import Layout, { siteTitle } from '../components/layout'
-import utilStyles from '../styles/utils.module.css'
+import Layout from '../components/layout.js'
+import React from 'react';
+import styles from '../styles/joingame.module.css'
+import Router from 'next/router'
+import jsCookie from 'js-cookie'
+
+if (jsCookie.get('token') != null) {
+  jsCookie.remove('token')
+}
+
+var gameCode
+var Username
+
+function JoinGame() {
+  var axios = require('axios');
+  var data = JSON.stringify({ "username": Username.toString(), "game_code": gameCode.toString() });
+
+  var config = {
+    method: 'post',
+    url: 'http://178.62.244.31:5050/join-game',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data
+  };
+  axios(config)
+    .then(function (response) {
+      console.log(response.data.token);
+      jsCookie.set('token', response.data.token)
+      redirectToLobby()
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
+function HostGame() {
+  var axios = require('axios');
+  axios.post('http://178.62.244.31:5050/host-game', {
+    "username": Username,
+  })
+    .then(res => {
+      jsCookie.set('token', res.data.token)
+      console.log(res.data.token)
+      redirectToLobby()
+    })
+}
+
+function redirectToLobby() {
+  Router.push("/Game/lobby")
+}
 
 
-export default function Home() {
+export default function home() {
+  jsCookie.remove('token')
+
+  function GameCodeChange(event) {
+    gameCode = event.target.value
+  }
+
+  function HandleNameChange(event) {
+    Username = event.target.value
+  }
+
+  const HostButton =
+    <button style={{ marginRight: 15 }} className={styles.submitButton} onClick={() => { HostGame() }}>
+      Host
+      </button>
+
+  const JoinButton =
+    <button className={styles.submitButton} onClick={() => { JoinGame(); }}>
+      Join
+      </button>
   return (
     <Layout>
       <div className="container">
-        <Head>
-          <title>Account</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <section className={utilStyles.headingMd}>
-          <div class="block home">
-          <div class="content">
-            <div class="row">
-              <div class="col">
-                <Link href="/Game/joingame"><a className={"button bordered"}>Join Game</a></Link>
+        <main>
+          <div class="block">
+            <div>
+              <div className={styles.center}>
+                <label name="Username" className={`text-green`}>
+                  Username:
+                </label>
+                <input id="GameUsernameCode" style={{ width: 300, height: 61, fontSize: 32 }} onChange={(e) => HandleNameChange(e)} name="GameCode" className={`text-green ${styles.input} ${styles.textCenter}`}>
+                </input>
               </div>
-              <div class ="col">
-                <Link href="/Game/creategame"><a className={"button bordered"}>create Game</a></Link>
+              <div className={styles.center}>
+                <label name="GameCode" className={`text-green`}>
+                  Game code:
+                </label>
+                <input id="GameCode" style={{ width: 160, height: 61, fontSize: 32 }} min="0" max="99999" defaultValue="" onChange={(e) => GameCodeChange(e)} type="number" name="GameCode" className={`text-green ${styles.input} ${styles.textCenter}`}>
+                </input>
+              </div>
+              <div className={styles.center}>
+                {HostButton} {JoinButton}
               </div>
               
             </div>
-          </div>         
-          <Link href="/Game/game"><a className={"button bordered"}>Grid Test</a></Link>
-         </div>    
-        </section>
+          </div>
+        </main>
       </div>
     </Layout>
   )
 }
+
